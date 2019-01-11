@@ -133,6 +133,137 @@
           }
         }
       }
+    },
+    "threejs1": {
+      "root": "projects/threejs1/",
+      "sourceRoot": "projects/threejs1/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/threejs1",
+            "index": "projects/threejs1/src/index.html",
+            "main": "projects/threejs1/src/main.ts",
+            "polyfills": "projects/threejs1/src/polyfills.ts",
+            "tsConfig": "projects/threejs1/tsconfig.app.json",
+            "assets": [
+              "projects/threejs1/src/favicon.ico",
+              "projects/threejs1/src/assets"
+            ],
+            "styles": [
+              "projects/threejs1/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/threejs1/src/environments/environment.ts",
+                  "with": "projects/threejs1/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "threejs1:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "threejs1:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "threejs1:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/threejs1/src/test.ts",
+            "polyfills": "projects/threejs1/src/polyfills.ts",
+            "tsConfig": "projects/threejs1/tsconfig.spec.json",
+            "karmaConfig": "projects/threejs1/karma.conf.js",
+            "styles": [
+              "projects/threejs1/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/threejs1/src/favicon.ico",
+              "projects/threejs1/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/threejs1/tsconfig.app.json",
+              "projects/threejs1/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "threejs1-e2e": {
+      "root": "projects/threejs1-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/threejs1-e2e/protractor.conf.js",
+            "devServerTarget": "threejs1:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "threejs1:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/threejs1-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "webgl"
